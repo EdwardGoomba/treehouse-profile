@@ -27,9 +27,6 @@ function getProfile(username) {
   });
 };
 
-// Set users you want to pull info for
-const users = ['edwarddanilyuk', 'chalkers', 'davemcfarland'];
-
-users.forEach(username => {
-  getProfile(username);
-});
+// Input required users in command line
+const users = process.argv.slice(2);
+users.forEach(getProfile);
