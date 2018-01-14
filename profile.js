@@ -1,18 +1,9 @@
 // Import modules
 const https = require('https');
 const http = require('http');
+const print = require('./print');
 
-// Print Error Messages
-function printError(error) {
-  console.error(error.message);
-}
-
-// Function to print message to console
-function printMessage(username, badgeCount, point) {
-  const message = `${username} has ${badgeCount} total badge(s) and ${point} points in JavaScript.`;
-  console.log(message);
-}
-
+// Get user data
 function get(username) {
   try {
     // Connect to API Url (https://teamtreehouse.com/username.json)
@@ -32,22 +23,22 @@ function get(username) {
             // Parse the data
             const profile = JSON.parse(body);
             // Print the data
-            printMessage(username, profile.badges.length, profile.points.JavaScript);
+            print.message(username, profile.badges.length, profile.points.JavaScript);
           } catch (error) {
-            printError(error);
+            print.error(error);
           }
         });
       } else {
         const message = `There was an error getting the profile for ${username} (${http.STATUS_CODES[response.statusCode]})`;
         const statusCodeError = new Error(message);
-        printError(statusCodeError);
+        print.error(statusCodeError);
       }
 
     });
 
-    request.on('error', printError);
+    request.on('error', print.error);
   } catch (error) {
-    printError(error);
+    print.error(error);
   }
 }
 
