@@ -6,25 +6,25 @@ const username = 'edwarddanilyuk';
 
 // Function to print message to console
 function printMessage(username, badgeCount, point) {
-  const message = `${username} has ${badgeCount} total badge(s) and ${point} points in JavaScript`;
+  const message = `${username} has ${badgeCount} total badge(s) and ${point} points in JavaScript.`;
   console.log(message);
 }
 
 
 // Connect to API Url (https://teamtreehouse.com/username.json)
 const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
-  console.log(response.statusCode);
 
+  let body = '';
   // Read the data
   response.on('data', data => {
-    let body = '';
     body += data.toString();
   });
 
   response.on('end', () => {
     // Parse the data
-    console.log(body);
+    const profile = JSON.parse(body);
     // Print the data
+    printMessage(username, profile.badges.length, profile.points.JavaScript);
   })
 
 });
