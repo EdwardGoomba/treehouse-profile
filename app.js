@@ -8,3 +8,10 @@ users.forEach(profile.get);
 
 print.error;
 print.message;
+
+/* Possible Iterations:
+
+1. Friendlier error Messagess
+2. Set topic (other than JS)
+
+*/
